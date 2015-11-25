@@ -1,11 +1,15 @@
 # Author: Tyler Lazar
 # Date: 2015-11-21
 
+import urllib2, time
 from BeautifulSoup import BeautifulStoneSoup
 
 VALID_SOLVENT = 'Water'
 MAX_PH = 7.5
 MIN_PH = 6.5
+
+INCHI_RESOLVER_URL = "http://cactus.nci.nih.gov/chemical/structure/{0}/stdinchi"
+TIME_BETWEEN_URL_REQUESTS = 0.5
 
 def extract_spectrum_info(filename):
 
@@ -26,6 +30,14 @@ def extract_spectrum_info(filename):
   if (  info['solvent'] == VALID_SOLVENT and
         float(info['sample-ph']) <= MAX_PH and
         float(info['sample-ph']) >= MIN_PH):
-    return info
+   
+    # Get the inchi code
+    try:
+      info['inchi-code'] = \
+          urllib2.urlopen(INCHI_RESOLVER_URL.format(info['inchi-key'])).read()
+      time.sleep(TIME_BETWEEN_URL_REQUESTS)
+      return info
+    except: # Any exception, don't care which
+      return None
   else:
     return None
