@@ -1,8 +1,12 @@
 from sklearn.svm import SVR
 import numpy as np
+import readinput as readin
+
+filename = 'input_data_1.txt'
+example = readin.open_file_init(filename)
 
 
-example = [['H2O',2,3,4,2,1,8.7],['H3C2',2,3,4,2,1,7.6],['H3H1C2',2,3,3,2,1,6.5],['H3C2J3',2,3,3,2,1,4.3],['H2O3',2,3,4,2,1,8.7]]
+#example = [['H2O',2,3,4,2,1,8.7],['H3C2',2,3,4,2,1,7.6],['H3H1C2',2,3,3,2,1,6.5],['H3C2J3',2,3,3,2,1,4.3],['H2O3',2,3,4,2,1,8.7]]
 example_name = list(x[0] for x in example)
 example_feature = list(x[1:-1] for x in example)
 example_ppm = list(x[-1] for x in example)
@@ -11,7 +15,8 @@ size = len(example)
 
 clf = SVR(C=1.0, epsilon=0.2)
 clf.fit(example_feature,example_ppm)
+es = [ 0.062292868433340656, -0.0615092364428, -0.0615092364428, -0.0615092364428, -0.0601589116919, -0.0525631199119, -0.0563610158019, -0.0380030252462, 0.062991162396, 0.0224852845875, -0.0615092364428, -0.0525631199119, -0.0580770893489, -0.0615092364428, 0.062991162396, -0.0120414470995, -0.0615092364428, 0.0644909838787, 0.00455187239286, -0.360889228621, 0.0644909838787, -0.0453440031174, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
-new_atom_features = [2,3,4,2,1]
+#new_atom_features = [2,3,4,2,1]
 
-print  'the new atom ppm might be: '+ str(clf.predict(new_atom_features)[0])
+print  'the new atom ppm might be: '+ str(clf.predict(es)[0])
