@@ -38,7 +38,7 @@ def open_file_init(filename):
                 #print matrix[i][k+1]
             matrix[i][k+1] = float(matrix[i][k+1])
             #matrix[i][k+1] = format(matrix[i][k+1],'.8f')
-        #print matrix[i]
+        print matrix[i]
     #print matrix
     return matrix
 #open_file_init(filename)
