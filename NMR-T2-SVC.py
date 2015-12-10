@@ -8,6 +8,8 @@ example = readin.open_file_init(filename)
 #example = [['H2O',2,3,4,2,1,8.7],['H3C2',2,3,4,2,1,7.6],['H3H1C2',2,3,3,2,1,6.5],['H3C2J3',2,3,3,2,1,4.3],['H2O3',2,3,4,2,1,8.7]]
 example_name = list(x[0] for x in example)
 example_feature = list(x[1:-1] for x in example)
+example_test = example_feature[1200:-1]
+example_feature = example_feature[0:1200]
 example_ppm = list(x[-1:] for x in example)
 example_ppm1 = list(x[-1:] for x in example)
 
@@ -39,10 +41,13 @@ for x in range(size):
 #print example_ppm
 clf = svm.SVC()
 #clf.fit(example_feature, example_ppm)  
-clf.fit(example_feature, example_ppm) 
-
-for k in range(size):
-    new_atom_features = example_feature[k]
+clf.fit(example_feature, example_ppm[0:1200]) 
+print '*****************'
+print example_test
+print '*****************'
+size_test = len(example_test)
+for k in range(size_test):
+    new_atom_features = example_test[k]
     result =  clf.predict(new_atom_features)
     #print result
     res_size = len(result)

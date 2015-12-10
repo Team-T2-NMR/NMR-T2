@@ -10,6 +10,8 @@ example = readin.open_file_init(filename)
 #example = [['H2O',2,3,4,2,1,8.7],['H3C2',2,3,4,2,1,7.6],['H3H1C2',2,3,2,2,1,6.5],['H3C2J3',2,3,3,2,1,4.3],['H2O3',2,3,4,2,1,8.7],['H2O3',2,3,2,2,1,8.7]]
 example_name = list(x[0] for x in example)
 example_feature = list(x[1:-1] for x in example)
+example_test = example_feature[1200:-1]
+example_feature = example_feature[0:1200]
 example_ppm = list(x[-1:] for x in example)
 example_ppm1 = list(x[-1:] for x in example)
 result_list = []
@@ -24,7 +26,7 @@ pac_classif = pca.fit_transform(example_feature)
 #print pac_classif
 
 
-size = len(example)
+size = len(example[0:1200])
 for x in range(size):
     for y in range(size):
         if (format(pac_classif[x][0],'.12f') == format(pac_classif[y][0],'.12f')):
@@ -37,7 +39,8 @@ example_ppm_ans = example_ppm
 #    example_ppm_ans[x] = 'similer to atom: '+str(example_name[x]) +' with ppm: '+ str(example_ppm[x])
 #print example_ppm    
 
-for k in range(size):
+size_test = len(example_test)
+for k in range(size_test):
     
     new_atom_features = example_feature[k]
     example_feature.append(new_atom_features)
