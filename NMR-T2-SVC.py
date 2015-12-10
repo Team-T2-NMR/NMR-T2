@@ -8,8 +8,11 @@ example = readin.open_file_init(filename)
 #example = [['H2O',2,3,4,2,1,8.7],['H3C2',2,3,4,2,1,7.6],['H3H1C2',2,3,3,2,1,6.5],['H3C2J3',2,3,3,2,1,4.3],['H2O3',2,3,4,2,1,8.7]]
 example_name = list(x[0] for x in example)
 example_feature = list(x[1:-1] for x in example)
-example_test = example_feature[1200:-1]
-example_feature = example_feature[0:1200]
+example_test = example_feature[1000:1390]
+example_feature1 = example_feature[0:1000]
+example_feature2 = example_feature[1390:-1]
+example_feature = example_feature1 + example_feature2
+
 example_ppm = list(x[-1:] for x in example)
 example_ppm1 = list(x[-1:] for x in example)
 
@@ -62,7 +65,7 @@ for k in range(size_test):
     total_dif = total_dif + different
     result_list.append(single_result)    
 
-f = open('SVC-OUT-PUT.txt','w')
+f = open('SVC-OUT-PUT4.txt','w')
 #f.write('hi there\n') # python will convert \n to os.linesep
 for i in range(len(result_list)):
     f.write(result_list[i]+'\n')
